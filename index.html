@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedro Henrique — Portfólio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --surface2: #16161f;
+            --border: rgba(255,255,255,0.07);
+            --border-hover: rgba(124,111,247,0.35);
+            --text: #f0eee8;
+            --muted: #7a7a8a;
+            --accent: #7c6ff7;
+            --accent2: #3de8a0;
+            --mono: 'DM Mono', monospace;
+            --sans: 'Syne', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(130px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-1 { width: 700px; height: 700px; background: rgba(124,111,247,0.11); top: -250px; left: -150px; }
+        .glow-2 { width: 500px; height: 500px; background: rgba(61,232,160,0.07); bottom: -150px; right: -100px; }
+        .glow-3 { width: 400px; height: 400px; background: rgba(124,111,247,0.06); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(10,10,15,0.65);
+        }
+
+        .nav-logo {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--accent2);
+            letter-spacing: 0.06em;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        main { position: relative; z-index: 1; }
+
+        section { padding: 7rem 2.5rem; max-width: 920px; margin: 0 auto; }
+
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 9rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--accent2);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 1px;
+            background: var(--accent2);
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 7.5vw, 5.8rem);
+            font-weight: 800;
+            line-height: 1.02;
+            letter-spacing: -0.025em;
+            margin-bottom: 1.75rem;
+        }
+
+        .highlight {
+            background: linear-gradient(130deg, var(--accent) 20%, var(--accent2) 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 540px;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .hero-desc strong { color: rgba(240,238,232,0.75); font-weight: 600; }
+
+        .hero-badges {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.75rem;
+        }
+
+        .badge {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.85rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .badge-green {
+            border-color: rgba(61,232,160,0.25);
+            color: var(--accent2);
+            background: rgba(61,232,160,0.06);
+        }
+
+        .dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--accent2);
+            animation: pulse 2.2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--accent);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            opacity: 0.8;
+        }
+
+        h2 {
+            font-size: clamp(1.9rem, 4vw, 2.9rem);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 3rem;
+        }
+
+        .stack-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .stack-pill {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+            cursor: default;
+        }
+
+        .stack-pill:hover {
+            border-color: var(--border-hover);
+            background: var(--surface2);
+            transform: translateY(-2px);
+        }
+
+        .stack-pill span { font-size: 1rem; }
+
+        .projects-grid { display: grid; gap: 1rem; }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: border-color 0.2s, transform 0.2s, background 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .project-card:hover {
+            border-color: var(--border-hover);
+            background: var(--surface2);
+            transform: translateY(-3px);
+        }
+
+        .project-info { flex: 1; }
+
+        .project-stack {
+            font-family: var(--mono);
+            font-size: 0.67rem;
+            color: var(--accent2);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.45rem;
+            opacity: 0.85;
+        }
+
+        .project-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .project-desc {
+            font-size: 0.83rem;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .project-arrow {
+            font-size: 1.1rem;
+            color: var(--muted);
+            transition: color 0.2s, transform 0.2s;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .project-card:hover .project-arrow {
+            color: var(--accent);
+            transform: translate(4px, -4px);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.4rem 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: border-color 0.2s, transform 0.2s, background 0.2s;
+        }
+        .contact-card:hover {
+            border-color: rgba(61,232,160,0.35);
+            background: var(--surface2);
+            transform: translateY(-3px);
+        }
+
+        .contact-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: rgba(124,111,247,0.1);
+            border: 1px solid rgba(124,111,247,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-label {
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-family: var(--mono);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-value {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in { animation: fadeUp 0.55s ease forwards; opacity: 0; }
+        .d1 { animation-delay: 0.05s; }
+        .d2 { animation-delay: 0.15s; }
+        .d3 { animation-delay: 0.28s; }
+        .d4 { animation-delay: 0.42s; }
+        .d5 { animation-delay: 0.55s; }
+
+        @media (max-width: 640px) {
+            nav { padding: 1rem 1.25rem; }
+            .nav-links { gap: 1.25rem; }
+            section { padding: 4.5rem 1.25rem; }
+            .project-card { flex-direction: column; }
+            h1 { font-size: 2.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="glow glow-3"></div>
+
+<nav>
+    <span class="nav-logo">~/pedrohenrc</span>
+    <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section id="sobre">
+        <div id="hero">
+            <p class="hero-eyebrow fade-in d1">Full Stack Developer</p>
+            <h1 class="fade-in d2">
+                Pedro<br />
+                <span class="highlight">Henrique</span>
+            </h1>
+            <p class="hero-desc fade-in d3">
+                Desenvolvedor Full Stack no <strong>NADIC — IFRN</strong> e estudante de
+                Informática no <strong>Campus Pau dos Ferros</strong>. Construo soluções
+                web com Python, FastAPI, React e Next.js.
+            </p>
+            <div class="hero-badges fade-in d4">
+                <span class="badge badge-green"><span class="dot"></span>Disponível para projetos</span>
+                <span class="badge">📍 Pau dos Ferros, RN</span>
+                <span class="badge">🎓 IFRN · NADIC</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="stack">
+        <p class="section-label">// tecnologias</p>
+        <h2>Stack</h2>
+        <div class="stack-grid">
+            <div class="stack-pill"><span>🐍</span> Python</div>
+            <div class="stack-pill"><span>⚛️</span> React</div>
+            <div class="stack-pill"><span>🔷</span> TypeScript</div>
+            <div class="stack-pill"><span>▲</span> Next.js</div>
+            <div class="stack-pill"><span>🌊</span> Tailwind CSS</div>
+            <div class="stack-pill"><span>🚀</span> FastAPI</div>
+            <div class="stack-pill"><span>⚙️</span> Git</div>
+            <div class="stack-pill"><span>🐘</span> PostgreSQL</div>
+            <div class="stack-pill"><span>🐬</span> MySQL</div>
+            <div class="stack-pill"><span>🐳</span> Docker</div>
+        </div>
+    </section>
+
+    <section id="projetos">
+        <p class="section-label">// trabalhos</p>
+        <h2>Projetos</h2>
+        <div class="projects-grid">
+
+            <a href="https://github.com/Pedrohenrc/TeamGoal" target="_blank" class="project-card">
+                <div class="project-info">
+                    <p class="project-stack">Python · GitHub</p>
+                    <p class="project-title">TeamGoal</p>
+                    <p class="project-desc">
+                        Gerenciamento de metas e times. Um dos projetos mais estrelados do perfil,
+                        com foco em organização colaborativa.
+                    </p>
+                </div>
+                <span class="project-arrow">↗</span>
+            </a>
+
+            <a href="https://github.com/Pedrohenrc/AutoMail-Classifier" target="_blank" class="project-card">
+                <div class="project-info">
+                    <p class="project-stack">Python · GitHub</p>
+                    <p class="project-title">AutoMail Classifier</p>
+                    <p class="project-desc">
+                        Classificador automático de e-mails utilizando Python.
+                        Automatiza a triagem de mensagens com base em critérios definidos.
+                    </p>
+                </div>
+                <span class="project-arrow">↗</span>
+            </a>
+
+            <a href="https://github.com/SIXBRO-CORPORATION/intercurso-ifrn-backend" target="_blank" class="project-card">
+                <div class="project-info">
+                    <p class="project-stack">Python · Docker · IFRN</p>
+                    <p class="project-title">Intercurso IFRN — Backend</p>
+                    <p class="project-desc">
+                        Sistema para gerenciar e compartilhar dados sobre o Intercurso no IFRN.
+                        Projeto colaborativo da SIXBRO Corporation com arquitetura em camadas.
+                    </p>
+                </div>
+                <span class="project-arrow">↗</span>
+            </a>
+
+            <a href="https://github.com/Pedrohenrc" target="_blank" class="project-card">
+                <div class="project-info">
+                    <p class="project-stack">GitHub</p>
+                    <p class="project-title">Ver todos os projetos</p>
+                    <p class="project-desc">
+                        Confira o restante do portfólio no GitHub, incluindo projetos do NADIC e
+                        colaborações open source.
+                    </p>
+                </div>
+                <span class="project-arrow">↗</span>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="contato">
+        <p class="section-label">// encontre-me</p>
+        <h2>Contato</h2>
+        <div class="contact-grid">
+
+            <a href="mailto:pirriquecsousa@gmail.com" class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <div>
+                    <p class="contact-label">E-mail</p>
+                    <p class="contact-value">pirriquecsousa@gmail.com</p>
+                </div>
+            </a>
+
+            <a href="https://linkedin.com/in/pedro-sousa-dev" target="_blank" class="contact-card">
+                <div class="contact-icon">💼</div>
+                <div>
+                    <p class="contact-label">LinkedIn</p>
+                    <p class="contact-value">/in/pedro-sousa-dev</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/Pedrohenrc" target="_blank" class="contact-card">
+                <div class="contact-icon">🐙</div>
+                <div>
+                    <p class="contact-label">GitHub</p>
+                    <p class="contact-value">@Pedrohenrc</p>
+                </div>
+            </a>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Pedro Henrique Carvalho Sousa · NADIC · IFRN Pau dos Ferros © 2025</p>
+</footer>
+
+</body>
+</html>
