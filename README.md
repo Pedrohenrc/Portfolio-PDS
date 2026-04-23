@@ -1,7 +1,7 @@
 # 💻 Portfólio Pessoal
 
 Este repositório contém o código do meu portfólio pessoal desenvolvido com HTML e CSS.  
-A página foi criada para apresentar minhas informações, habilidades e projetos ao longo do curso.
+A página foi criada para apresentar minhas informações, habilidades e projetos como parte de uma atividade referente a matéria Projeto e Desenvolvimento de Software.
 
 ---
 
