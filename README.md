@@ -28,7 +28,3 @@ O portfólio é uma página web simples e responsiva que reúne:
 - Estrutura organizada em seções  
 - Layout limpo e minimalista  
 - Navegação simples e direta  
-
----
-
-## 📂 Estrutura do Projeto
